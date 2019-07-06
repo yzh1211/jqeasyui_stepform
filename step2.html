@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Complex Toolbar on Dialog - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="themes/icon.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.easyui.min.js"></script>
+
+</head>
+<body>
+
+<div style="width: 100%;height: 100%;" >
+    <div id="aaa" class="easyui-dialog" style="width:600px;height:300px"
+         data-options="title:'表单分步骤提交',modal:true,closed:true,
+			buttons:[{
+				text:'上一步',
+				id:'prev',
+				handler:function(){
+				    prev();
+				}
+			},{
+				text:'下一步',
+				id:'next',
+				handler:function(){
+				    next();
+				}
+			}]">
+        <div data-options="fit:true" id="content"></div>
+    </div>
+</div>
+
+<div style="display: none;" id="hiddenForm">
+    <div class="formItem">
+        姓名:<input name="name">
+    </div>
+    <div class="formItem">
+        密码：<input name="password">
+    </div>
+    <div class="formItem">
+        手机号：<input name="cellphone">
+    </div>
+    <div class="formItem">
+        邮箱：<input name="email">
+    </div>
+</div>
+<script type="text/javascript" src="step2.js?"></script>
+<script>
+    initStepDialog("hiddenForm","content","aaa");
+</script>
+<a href="javascript:void(0)" id="open" class="easyui-linkbutton">Open</a>
+<a href="javascript:void(0)" id="close" class="easyui-linkbutton" >Close</a>
+<script type="text/javascript">
+	$("#open").click(function(){
+		$('#aaa').dialog('open')
+	});
+	$("#close").click(function(){
+		$('#aaa').dialog('close')
+	});
+</script>
+</body>
+</html>
