@@ -32,6 +32,7 @@
 </div>
 
 <div style="display: none;" id="hiddenForm">
+    <!--把每一步需要显示的内容用<div class="formItem"></div>包起来 -->
     <div class="formItem">
         姓名:<input name="name">
     </div>
@@ -46,17 +47,36 @@
     </div>
 </div>
 <script type="text/javascript" src="step2.js?"></script>
-<script>
-    initStepDialog("hiddenForm","content","aaa");
-</script>
 <a href="javascript:void(0)" id="open" class="easyui-linkbutton">Open</a>
 <a href="javascript:void(0)" id="close" class="easyui-linkbutton" >Close</a>
 <script type="text/javascript">
+    function mySubmit(){        
+        /*
+         * 这里ajax提交需要一个返回值,提交成功:true 提交失败:false
+         *
+         */
+        $.ajax({
+            url:"aaaa",//示例中的url会提交失败并返回false，此时窗口不会关闭；请改成你自己的url
+            data:{"a":1},
+            type:'POST',
+            success:function(){
+                console.log("true");
+                return true;
+            },
+            error:function(){
+                console.log("false");
+                return false;
+            }
+        });
+    }
+    //打开对话框的点击事件
 	$("#open").click(function(){
-		$('#aaa').dialog('open')
-	});
+        $("#aaa").initDialog("hiddenForm",mySubmit);
+		$('#aaa').dialog('open');
+    });
+    //关闭对话框的点击事件
 	$("#close").click(function(){
-		$('#aaa').dialog('close')
+		$('#aaa').dialog('close');
 	});
 </script>
 </body>
